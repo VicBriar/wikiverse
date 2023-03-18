@@ -7,12 +7,13 @@ import apiURL from '../api';
 
 export const App = () => {
 //STATE!----------------------
-	const [pages, setPages] = useState([]);
-	const [view, setView] = useState({
+	const viewBaseState = {
 		page: "home",
+		pages: [],
 		slug: null,
 		article: null
-	})
+	};
+	const [view, setView] = useState(viewBaseState)
 //-----------------------------
 ////~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//fetching data for pages
@@ -20,9 +21,9 @@ export const App = () => {
 		try {
 			const response = await fetch(`${apiURL}/wiki`);
 			const pagesData = await response.json();
-			setPages(pagesData);
+			setView({...viewBaseState, page: "home", pages: pagesData});
 		} catch (err) {
-			console.log("Oh no an error! ", err)
+			console.log("Oh no an error! ", err);
 		}
 	}
 
@@ -32,17 +33,22 @@ export const App = () => {
 			const articleData = await response.json();
 			
 			setView({
+				...view,
 				page: "article",
 				slug: slug,
 				article: articleData
 			})
-			console.log("view was; ", view)
+			console.log("page was clicked!, view was; ", view);
 
 		}catch(err){
-			console.log("Oh no an error! ", err)
+			console.log("Oh no an error! ", err);
 		}
 	}
 
+	function handleHomeClick() {
+		fetchPages();
+		console.log("home was clicked!")
+	}
 ////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //loading pages on first page load/refresh
@@ -55,15 +61,15 @@ export const App = () => {
 		switch(view.page){
 			//home page
 			case 'home':
-			console.log("home")
+			console.log("home");
 				return (<>
 				<h2>An interesting 📚</h2>
-				<PagesList pages={pages} handleClick={handlePageClick} />
+				<PagesList pages={view.pages} handleClick={handlePageClick} />
 				</>);
 			//article page
 			case 'article':
-			console.log("article")
-			return (<Article view={view} />);
+			console.log("article");
+			return (<Article view={view} handleHomeClick={handleHomeClick} />);
 			//posting page
 			case 'post':
 			return;

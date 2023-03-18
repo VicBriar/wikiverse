@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
-export function Article({view}) {
-console.log("view is", view)
+export function Article({view,handleHomeClick}) {
+console.log("from article, view is", view)
 let article = view.article;
 console.log("tags are ", article.tags)
 
@@ -13,8 +13,9 @@ console.log("tags are ", article.tags)
           <h3>{new Date(article.createdAt).toString()}</h3>
           <p>{article.tags.map((tagObj,index)=> article.tags.length-1 <= index ?  "#" + tagObj.name : "#" + tagObj.name + ", ")}</p>
         </div>
-        <main>
+        <article>
           <p>{article.content}</p>
-        </main>
+        </article>
+        <button id="home" onClick={handleHomeClick}>Home</button>
     </main>);
 }
