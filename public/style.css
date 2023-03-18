@@ -2,9 +2,71 @@
   margin: 0;
   box-sizing: border-box;
   background-color: rgb(223, 223, 223);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
 }
 
 main {
   padding: 1rem;
   height: 100vh;
 }
+
+.hide-element{
+  border: 0;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; 
+}
+
+#navBar {
+  display: flex;
+  flex-wrap: wrap;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 0px 10vw;
+}
+
+.navItem {
+  display: flex;
+  flex: 1 0 25%;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 0px 10px;
+}
+
+.srchItem {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+#searchButtn {
+  font-family: 'Playfair Display', serif;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.navButtn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+button {
+  font-family: 'Playfair Display', serif;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+

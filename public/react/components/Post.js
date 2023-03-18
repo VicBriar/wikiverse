@@ -23,7 +23,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
     <>
       <form onSubmit={handleSubmit}>
         <div className="title">
-          <label for="title"> Article Title: </label>
+          <label className="hide-element" for="title"> Article Title: </label>
           <input
             value={view.articleDraft.title}
             onChange={
@@ -43,7 +43,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
         
         
         <div className="details">
-          <label for="name">Your Name: </label>
+          <label className="hide-element" for="name">Your Name: </label>
           <input
             value={view.articleDraft.name}
             onChange={
@@ -59,7 +59,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
             required
           ></input>
 
-          <label for="email" minlength="4" maxlength="50">Your Email: </label>
+          <label className="hide-element"  for="email" minlength="4" maxLength="50">Your Email: </label>
           <input
             value={view.articleDraft.email}
             onChange={
@@ -79,7 +79,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
 
 
         <div className="tags">
-          <label for="tags">Your article's tags: </label>
+          <label className="hide-element"  for="tags">Your article's tags: </label>
           <textarea
             value={view.articleDraft.tags}
             onChange={
@@ -99,7 +99,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
 
 
         <div className="article">
-          <label for="content">Type your post here:</label>
+          <label className="hide-element"  for="content">Type your post here:</label>
           <br></br>
           <textarea
             value={view.articleDraft.content}

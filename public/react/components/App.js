@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { PagesList } from './PagesList';
 import {Article} from './Article';
 import {Post} from './Post';
+import { PostButton } from './MiniComponents';
+import { Header } from './Header';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
+
 
 export const App = () => {
 //STATE!----------------------
@@ -84,6 +87,10 @@ export const App = () => {
 			fetchAndSetPages()
 		}catch(err){console.error("error from handle delete click; ", err)}
 	}
+	async function handleSearchClick(event){
+		event.preventDefault();
+		console.log("search was clicked, behavoir not written");
+	}
 
 	function handleHomeClick() {
 		fetchAndSetPages();
@@ -109,7 +116,7 @@ export const App = () => {
 				return (<>
 				<h2>An interesting 📚</h2>
 				<PagesList pages={view.pages} handleClick={handlePageClick} />
-				<button onClick={handleNewPostClick}>Write your own post</button>
+				<PostButton handleNewPostClick={handleNewPostClick} />
 				</>);
 			//article page
 			case 'article':
@@ -122,7 +129,7 @@ export const App = () => {
 	}
 	return (
 		<main>	
-      <h1>WikiVerse</h1>
+    <Header handleHomeClick={handleHomeClick} handleNewPostClick={handleNewPostClick} handleSearchClick={handleSearchClick} />
 	  {loader()}
 		</main>
 	)
