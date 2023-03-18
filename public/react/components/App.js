@@ -76,7 +76,12 @@ export const App = () => {
 	async function handleDeleteClick(){
 		console.log("current article is ", view.article.slug)
 		try{
-			response = await fetch(`${apiURL}/wiki/${view.article.slug}`)
+			response = await fetch(`${apiURL}/wiki/${view.article.slug}`,{
+				method: "DELETE"
+			});
+			const data = await response.json();
+			console.log(data);
+			fetchAndSetPages()
 		}catch(err){console.error("error from handle delete click; ", err)}
 	}
 
