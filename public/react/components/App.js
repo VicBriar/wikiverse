@@ -5,7 +5,6 @@ import {Post} from './Post';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
-import { response } from 'express';
 
 export const App = () => {
 //STATE!----------------------
@@ -68,18 +67,18 @@ export const App = () => {
 					view.articleDraft
 				)
 			});
-			const data = await response.json();
+			// const data = await response.json();
 			fetchAndSetPages();
 		}catch(err){
 			console.log(err);
 		}
 	}
-	// async function handleDeleteClick(){
-	// 	console.log("current article is ", view.article.slug)
-	// 	try{
-	// 		// response = await fetch(`${apiURL}/wiki/${view.article.slug}`)
-	// 	}catch(err){console.error("error from handle delete click; ", err)}
-	// }
+	async function handleDeleteClick(){
+		console.log("current article is ", view.article.slug)
+		try{
+			response = await fetch(`${apiURL}/wiki/${view.article.slug}`)
+		}catch(err){console.error("error from handle delete click; ", err)}
+	}
 
 	function handleHomeClick() {
 		fetchAndSetPages();
