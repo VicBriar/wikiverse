@@ -21,7 +21,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
 
     return (
     <>
-      <form onSubmit={(event) => handleSubmit() }>
+      <form onSubmit={handleSubmit}>
         <div className="title">
           <label for="title"> Article Title: </label>
           <input
@@ -93,6 +93,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
             id="tagsInput"
             rows="2" cols="45"
             placeholder="firstTag newtag ect.."
+            spellCheck="false"
           ></textarea>
         </div>
 
@@ -121,7 +122,7 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
 
         <div className="buttonsContainer">
           <input type="submit" value="post article" />
-          <ClearButton handleClearClick={(evnt) => handleClearClick(evnt)} />
+          <ClearButton handleClearClick={handleClearClick} />
         </div>
       </form>
       <HomeButton handleHomeClick={handleHomeClick}/>

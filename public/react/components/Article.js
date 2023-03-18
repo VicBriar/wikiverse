@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import { HomeButton } from "./MiniComponents";
+import { DeleteButton, HomeButton } from "./MiniComponents";
 
-export function Article({view,handleHomeClick}) {
+export function Article({view,handleHomeClick,handleDeleteClick}) {
 console.log("from article, view is", view)
 let article = view.article;
-console.log("tags are ", article.tags)
 
     return(
     <div>
@@ -17,6 +16,7 @@ console.log("tags are ", article.tags)
         <article>
           <p>{article.content}</p>
         </article>
+        <DeleteButton id="articleDeleteButton" handleDeleteClick={handleDeleteClick}/>
         <HomeButton id="articleHomeButton" handleHomeClick={handleHomeClick}/>
     </div>);
 }

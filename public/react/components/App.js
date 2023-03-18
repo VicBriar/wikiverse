@@ -5,6 +5,7 @@ import {Post} from './Post';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
+import { response } from 'express';
 
 export const App = () => {
 //STATE!----------------------
@@ -53,18 +54,39 @@ export const App = () => {
 			console.log("Oh no an error! ", err);
 		}
 	}
-	async function handleSubmit(event,article){
+	async function handleSubmit(event){
 		event.preventDefault();
 		console.log("submit clicked")
-
+		console.log("pages are ", view.pages, "and view.articleDraft is", view.articleDraft)
+		try{
+			const response = await fetch(`${apiURL}/wiki`,{
+				method: "POST",
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify(
+					view.articleDraft
+				)
+			});
+			const data = await response.json();
+			fetchAndSetPages();
+		}catch(err){
+			console.log(err);
+		}
 	}
+	// async function handleDeleteClick(){
+	// 	console.log("current article is ", view.article.slug)
+	// 	try{
+	// 		// response = await fetch(`${apiURL}/wiki/${view.article.slug}`)
+	// 	}catch(err){console.error("error from handle delete click; ", err)}
+	// }
 
 	function handleHomeClick() {
 		fetchAndSetPages();
 		console.log("home was clicked!")
 	}
 	function handleNewPostClick() {
-		setView({...viewBaseState, page: "post", pages: null, articleDraft: {...view.articleDraft}})
+		setView({...viewBaseState, page: "post", articleDraft: {...view.articleDraft}})
 		console.log("write a post was clicked!")
 	}
 ////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,7 +109,7 @@ export const App = () => {
 				</>);
 			//article page
 			case 'article':
-			return (<Article view={view} handleHomeClick={handleHomeClick} />);
+			return (<Article view={view} handleHomeClick={handleHomeClick} handleDeleteClick={handleDeleteClick} />);
 			//posting page
 			case 'post':
 			return <Post view={view} setView={setView} handleSubmit={handleSubmit} handleHomeClick={handleHomeClick} />;
