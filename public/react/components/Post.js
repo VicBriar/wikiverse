@@ -1,10 +1,21 @@
 import React, {useState} from "react";
-import { HomeButton } from "./MiniComponents";
+import { HomeButton, ClearButton } from "./MiniComponents";
 
 
 export function Post({view,setView,handleSubmit,handleHomeClick}){
     
-    // const [newArticle, setNewArticle] = useState(articleBaseState)
+    function handleClearClick(evnt){
+      evnt.preventDefault()
+      setView({
+        ...view,
+        articleDraft: 
+          {title: "",
+			    content: "",
+			    name: "",
+			    email: "",
+			    tags: ""}
+      })
+    }
 
     console.log('Post, view.articleDraft is', view.articleDraft);
 
@@ -110,9 +121,10 @@ export function Post({view,setView,handleSubmit,handleHomeClick}){
 
         <div className="buttonsContainer">
           <input type="submit" value="post article" />
+          <ClearButton handleClearClick={(evnt) => handleClearClick(evnt)} />
         </div>
       </form>
-      <HomeButton handleHomeClick={handleHomeClick} />
+      <HomeButton handleHomeClick={handleHomeClick}/>
       
     </>
     );

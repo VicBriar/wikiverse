@@ -55,6 +55,7 @@ export const App = () => {
 	}
 	async function handleSubmit(event,article){
 		event.preventDefault();
+		console.log("submit clicked")
 
 	}
 
